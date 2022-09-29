@@ -10,6 +10,7 @@ class Card extends React.Component {
         <p data-testid="name-card">
           { cardName }
         </p>
+        {/* </label> */}
 
         <img
           src={ cardImage }
