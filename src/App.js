@@ -7,12 +7,13 @@ class App extends React.Component {
     inputCard: '',
     descriptionInput: '',
     imageSrc: '',
-    attr1Input: '',
-    attr2Input: '',
-    attr3Input: '',
+    attr1Input: '0',
+    attr2Input: '0',
+    attr3Input: '0',
     selectRarityInput: '',
     checkBoxInput: false,
     buttonDisabled: true,
+    cardList: [{}],
   };
 
   handleButtonDisabled = () => {
@@ -54,19 +55,34 @@ class App extends React.Component {
     }, () => this.handleButtonDisabled());
   };
 
-  // handleButtonDisabled = () => {
-  //   const { buttonDisabled, inputCard, descriptionInput,
-  //     checkBoxInput, attr1Input, attr2Input, attr3Input } = this.state;
-  //   if ( inputCard.length > 0) {
-  //     this.setState({
-  //       buttonDisabled: false,
-  //     });
-  //   }
-  // };
+  handleButtonClick = () => {
+    this.setState((prevState) => ({
+      inputCard: '',
+      descriptionInput: '',
+      imageSrc: '',
+      attr1Input: '0',
+      attr2Input: '0',
+      attr3Input: '0',
+      selectRarityInput: '',
+      checkBoxInput: false,
+      buttonDisabled: true,
+      cardList: [{
+        inputCard: prevState.inputCard,
+        descriptionInput: prevState.descriptionInput,
+        imageSrc: prevState.imageSrc,
+        attr1Input: prevState.attr1Input,
+        attr2Input: prevState.attr2Input,
+        attr3Input: prevState.attr3Input,
+        selectRarityInput: prevState.attr3Input,
+        checkBoxInput: prevState.checkBoxInput,
+      }],
+    }));
+  };
 
   render() {
     const { inputCard, descriptionInput, imageSrc, attr1Input, attr2Input,
-      attr3Input, selectRarityInput, checkBoxInput, buttonDisabled } = this.state;
+      attr3Input, selectRarityInput, checkBoxInput, buttonDisabled,
+      cardList } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -82,7 +98,7 @@ class App extends React.Component {
           hasTrunfo={ false }
           isSaveButtonDisabled={ buttonDisabled }
           onInputChange={ this.handleChange }
-          onSaveButtonClick={ () => {} }
+          onSaveButtonClick={ this.handleButtonClick }
 
         />
         <Card
@@ -94,6 +110,7 @@ class App extends React.Component {
           cardImage={ imageSrc }
           cardRare={ selectRarityInput }
           cardTrunfo={ checkBoxInput }
+          myCards={ cardList }
         />
       </div>
     );
