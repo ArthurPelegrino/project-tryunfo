@@ -77,7 +77,6 @@ class App extends React.Component {
       });
     }
 
-    // const { cardList } = this.state;
     this.setState((prevState) => ({
       inputCard: '',
       descriptionInput: '',
@@ -95,7 +94,8 @@ class App extends React.Component {
   render() {
     const { inputCard, descriptionInput, imageSrc, attr1Input, attr2Input,
       attr3Input, selectRarityInput, checkBoxInput, buttonDisabled,
-      cardList, hasTrunfoInput } = this.state;
+      hasTrunfoInput, cardList } = this.state;
+
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -123,8 +123,25 @@ class App extends React.Component {
           cardImage={ imageSrc }
           cardRare={ selectRarityInput }
           cardTrunfo={ checkBoxInput }
-          myCards={ cardList }
         />
+        <div>
+          <ol>
+            { cardList.map((card, index) => (
+              <li key={ index }>
+                <Card
+                  cardName={ card.inputCard }
+                  cardDescription={ card.descriptionInput }
+                  cardAttr1={ card.attr1Input }
+                  cardAttr2={ card.attr2Input }
+                  cardAttr3={ card.attr3Input }
+                  cardImage={ card.imageSrc }
+                  cardRare={ card.selectRarityInput }
+                  cardTrunfo={ card.checkBoxInput }
+                />
+              </li>))}
+          </ol>
+
+        </div>
       </div>
     );
   }
