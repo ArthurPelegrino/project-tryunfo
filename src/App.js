@@ -13,7 +13,8 @@ class App extends React.Component {
     selectRarityInput: '',
     checkBoxInput: false,
     buttonDisabled: true,
-    cardList: [{}],
+    hasTrunfoInput: false,
+    cardList: [],
   };
 
   handleButtonDisabled = () => {
@@ -56,6 +57,27 @@ class App extends React.Component {
   };
 
   handleButtonClick = () => {
+    const { inputCard, descriptionInput, imageSrc,
+      attr1Input, attr2Input, attr3Input, selectRarityInput,
+      checkBoxInput } = this.state;
+    const card = {
+      inputCard,
+      descriptionInput,
+      imageSrc,
+      attr1Input,
+      attr2Input,
+      attr3Input,
+      selectRarityInput,
+      checkBoxInput,
+    };
+
+    if (checkBoxInput === true) {
+      this.setState({
+        hasTrunfoInput: true,
+      });
+    }
+
+    // const { cardList } = this.state;
     this.setState((prevState) => ({
       inputCard: '',
       descriptionInput: '',
@@ -66,23 +88,14 @@ class App extends React.Component {
       selectRarityInput: '',
       checkBoxInput: false,
       buttonDisabled: true,
-      cardList: [{
-        inputCard: prevState.inputCard,
-        descriptionInput: prevState.descriptionInput,
-        imageSrc: prevState.imageSrc,
-        attr1Input: prevState.attr1Input,
-        attr2Input: prevState.attr2Input,
-        attr3Input: prevState.attr3Input,
-        selectRarityInput: prevState.attr3Input,
-        checkBoxInput: prevState.checkBoxInput,
-      }],
+      cardList: [...prevState.cardList, card],
     }));
   };
 
   render() {
     const { inputCard, descriptionInput, imageSrc, attr1Input, attr2Input,
       attr3Input, selectRarityInput, checkBoxInput, buttonDisabled,
-      cardList } = this.state;
+      cardList, hasTrunfoInput } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -95,7 +108,7 @@ class App extends React.Component {
           cardImage={ imageSrc }
           cardRare={ selectRarityInput }
           cardTrunfo={ checkBoxInput }
-          hasTrunfo={ false }
+          hasTrunfo={ hasTrunfoInput }
           isSaveButtonDisabled={ buttonDisabled }
           onInputChange={ this.handleChange }
           onSaveButtonClick={ this.handleButtonClick }
